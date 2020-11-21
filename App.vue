@@ -13,8 +13,8 @@ import {
 } from "vue-native-router";
 
 import homeScreen from './router/Home.vue'
-import detailsScreen from './router/Details.vue'
-import NavBar from './global-components/Navigation.vue'
+import datasetScreen from './router/Data-browser.vue'
+import recommendedScreen from './router/Recommended.vue'
 
 const NAV_OPTIONS = {
   header: null,
@@ -27,12 +27,12 @@ const StackNavigator = createStackNavigator(
       screen: homeScreen,
       navigationOptions: NAV_OPTIONS
     },
-    Details: {
-      screen: detailsScreen,
+    DataSets: {
+      screen: datasetScreen,
       navigationOptions: NAV_OPTIONS
     },
-    NavBar: {
-      screen: NavBar,
+    Recommended: {
+      screen: recommendedScreen,
       navigationOptions: NAV_OPTIONS
     }
   },

@@ -1,10 +1,14 @@
 <template>
   <SafeAreaView class="container">
-    <scroll-view class="content-main-scroll">
+    <scroll-view class="content-main-scroll" :alwaysBounceVertical="false">
     <view class="img-container">
         <image class="header-image" :source="{uri: 'https://naturalhistorymuseum.github.io/dataportal-docs/images/logo.png'}"/>
     </view>
         <text class="title-text">Popular categories</text>
+        <view class="category-container">
+          <CategoryCard :navigation="this.props.navigation" v-for="item in data" v-bind:item="item" :key="item"></CategoryCard>
+        </view>
+        <text class="title-text">Pinned content</text>
     </scroll-view>
     <NavBar :navigation="this.props.navigation"></NavBar>
   </SafeAreaView>
@@ -16,11 +20,16 @@ import React from 'react';
 import {Text, View} from 'react-native';
 
 import NavBar from '../global-components/Navigation.vue'
+import CategoryCard from '../global-components/Category.vue'
 
 export default {
   data() {
     return {
-        data: ''
+        data: [ //remeber specific routes and key layout
+          {'title' : 'Dinosaurs', "img" : require('../assets/dino.png'), "navi" : 'DataSets'},
+          {'title' : 'Minerals', "img" : require('../assets/minerals.png'), "navi" : 'Details'},
+          {'title' : 'Ancient buildings', "img" : require('../assets/dolmen.png'), "navi" : 'Details'}
+        ]
     };
   },
   props: {
@@ -34,7 +43,7 @@ export default {
     }
   },
   components: {
-      NavBar
+      NavBar, CategoryCard
   }
 }
 </script>
@@ -62,5 +71,10 @@ export default {
 
 .content-main-scroll {
     height: 50;
+    margin-bottom: 40;
+}
+
+.category-container {
+  margin: 20;
 }
 </style>

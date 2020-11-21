@@ -3,10 +3,10 @@
         <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('Home')">
             <image :source="require('../assets/home.png')" class="icon"/>
         </touchable-opacity>
-        <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('Details')">
+        <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('Recommended')">
             <image :source="require('../assets/list.png')" class="icon"/>
         </touchable-opacity>
-        <touchable-opacity class="nav-bar-child">
+        <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('DataSets')">
             <image :source="require('../assets/dataset.png')" class="icon"/>
         </touchable-opacity>
         <touchable-opacity class="nav-bar-child">

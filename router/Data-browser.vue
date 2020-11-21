@@ -49,7 +49,7 @@ export default {
     },
     getData: function(item) {
         return (<View style={{flexDirection: "row", height: 20, backgroundColor: "#5c37b0", margin: 10}}>
-          <Text style={{color: '#FFFFFF'}}>{item.item.nhmRequestUrl}</Text>
+          <Text style={{color: '#FFFFFF'}}>{`\u2022 ${item.item.nhmRequestUrl}`}</Text>
         </View>)
       },
       getter: async function(value) {
