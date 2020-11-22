@@ -47,17 +47,10 @@ const StackNavigator = createStackNavigator(
     })
   },
 );
-
+console.disableYellowBox = true;
 const AppNavigator = createAppContainer(StackNavigator);
 
 export default {
-  data() {
-    return {
-      complete: false,
-      request: [],
-      requestVal: ''
-    };
-  },
   components: { AppNavigator }
 }
 </script>

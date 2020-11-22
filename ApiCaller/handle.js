@@ -7,6 +7,7 @@ var getNhmDataSets = async (tag) => {
                 if (d.resources[item].datastore_active) {
                     validObjs.push({
                         "title" : d.name,
+                        "displayData": false,
                         "resource_id" : d.resources[item].id,
                         "nhmRequestUrl" : `https://data.nhm.ac.uk/api/3/action/datastore_search?resource_id=${d.resources[item].id}`
                     })
@@ -15,7 +16,7 @@ var getNhmDataSets = async (tag) => {
         })
         for (var set in validObjs) {
             validObjs[set].dataRequest = await request.get(validObjs[set].nhmRequestUrl)
-            .then(set => set.data.result)
+            .then(set => set.data.result.records)
             .catch(() => 'Error')
         }
         return validObjs

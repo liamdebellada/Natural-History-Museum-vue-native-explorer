@@ -1,6 +1,6 @@
 <template>
   <SafeAreaView class="container">
-    <scroll-view class="content-main-scroll" :alwaysBounceVertical="false">
+    <scroll-view class="content-main-scroll" :alwaysBounceVertical="true">
     <view class="img-container">
         <image class="header-image" :source="{uri: 'https://naturalhistorymuseum.github.io/dataportal-docs/images/logo.png'}"/>
     </view>
