@@ -15,6 +15,8 @@ import {
 import homeScreen from './router/Home.vue'
 import datasetScreen from './router/Data-browser.vue'
 import recommendedScreen from './router/Recommended.vue'
+import mapScreen from './router/Map.vue'
+import settingsScreen from './router/Settings.vue'
 
 const NAV_OPTIONS = {
   header: null,
@@ -33,6 +35,14 @@ const StackNavigator = createStackNavigator(
     },
     Recommended: {
       screen: recommendedScreen,
+      navigationOptions: NAV_OPTIONS
+    },
+    Map: {
+      screen: mapScreen,
+      navigationOptions: NAV_OPTIONS
+    },
+    Settings: {
+      screen: settingsScreen,
       navigationOptions: NAV_OPTIONS
     }
   },

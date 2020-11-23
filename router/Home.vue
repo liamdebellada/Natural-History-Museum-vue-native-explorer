@@ -6,7 +6,7 @@
     </view>
         <text class="title-text">Popular categories</text>
         <view class="category-container">
-          <CategoryCard :navigation="this.props.navigation" v-for="item in data" v-bind:item="item" :key="item"></CategoryCard>
+          <CategoryCard :navigation="this.props.navigation" v-for="item in data" v-bind:item="item" :key="item.title"></CategoryCard>
         </view>
         <text class="title-text">Pinned content</text>
     </scroll-view>
@@ -71,7 +71,7 @@ export default {
 
 .content-main-scroll {
     height: 50;
-    margin-bottom: 40;
+    margin-bottom: 60;
 }
 
 .category-container {

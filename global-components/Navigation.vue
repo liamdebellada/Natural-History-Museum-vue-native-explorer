@@ -9,10 +9,10 @@
         <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('DataSets')">
             <image :source="require('../assets/dataset.png')" class="icon"/>
         </touchable-opacity>
-        <touchable-opacity class="nav-bar-child">
+        <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('Map')">
             <image :source="require('../assets/map-pin.png')" class="icon"/>
         </touchable-opacity>
-        <touchable-opacity class="nav-bar-child">
+        <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('Settings')">
             <image :source="require('../assets/settings.png')" class="icon"/>
         </touchable-opacity>
     </view>

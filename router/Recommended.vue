@@ -5,7 +5,7 @@
                 <text class="title-text">Recommended</text>
             </view>
             <view class="recommended-container">
-                <view v-for="recommend in recommended" :key="recommend" class="recommended-parent">
+                <view v-for="recommend in recommended" :key="recommend.title" class="recommended-parent">
                     <touchable-opacity class="recommended-content">
                         <text class="recommended-text">{{recommend.title}}</text>
                         <text class="recommended-desc">{{recommend.description}}</text>
@@ -25,7 +25,7 @@
                 <text class="title-text">Learn more</text>
             </view>
             <view class="learn-list-container">
-                <touchable-opacity v-for="learnItem in learnMore" :key="learnItem">
+                <touchable-opacity v-for="learnItem in learnMore" :key="learnItem.title">
                     <text class="bulleted-list">{{`\u2022 ${learnItem.title}`}}</text>
                 </touchable-opacity>
             </view>
