@@ -2,9 +2,9 @@
     <SafeAreaView class="container">
         <view class="map-container">
             <map-view class="container" :initial-region="coordinates">
-                <Marker :coordinate="{latitude: 51.5858233, longitude: -0.0658707}" :onPress="() => createSlideView()">
+                <Marker v-if="requestFinished" v-for="(item, index) in dataPoints" :key="index" :coordinate="{latitude: item.lat, longitude: item.long}" :onPress="() => createSlideView(item)">
                     <view class="marker">
-                         <image :source="{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Coelestin_01.jpg/1200px-Coelestin_01.jpg'}" class="marker-img"/>
+                         <image :source="{uri: `${item.url}`}" class="marker-img"/>
                     </view>
                 </Marker>
             </map-view>
@@ -27,6 +27,8 @@
 import NavBar from '../global-components/Navigation.vue'
 import MapView, {Marker} from "react-native-maps";
 
+var requestNhmData = require('../ApiCaller/handle.js')
+
 import * as React from 'react';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -35,7 +37,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import SheetView from '../global-components/Sheet.vue'
 
 var data = {
-    title: "Content title"
+    taxonomy: "Tap an item on the map to get started."
 }
 var renderContent = () => {
     return (
@@ -63,21 +65,28 @@ export default {
                 longitudeDelta: 0.0421
             },
             renderContent: renderContent,
-            renderHeader: renderHeader
+            renderHeader: renderHeader,
+            requestFinished: false,
+            dataPoints: []
         };
     },
     props: {
         navigation: {type: Object}
     },
+    created() {
+        this.dataGetter()
+    },
     components: { NavBar, MapView, Marker, BottomSheet },
     methods: {
-        createSlideView() {
+        createSlideView(selected) {
             this.$refs.refer.snapTo(1)
-            // this.$refs.refer.props.renderContent = renderContent()
-            data = {
-                title: "Minerals"
-            }
+            data = selected
             this.$refs.refer.forceUpdate()
+        },
+        dataGetter: async function() {
+            var data = await requestNhmData.getDataStore('5955e890-3530-49a8-8042-cacca80d7f49')
+            this.dataPoints = data
+            this.requestFinished = true
         }
     }
 }
@@ -87,6 +96,11 @@ export default {
 .container {
     background-color: #1f1f1f;
     min-height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }
 .map-container {
     flex: 1;

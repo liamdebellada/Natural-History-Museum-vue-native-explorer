@@ -25,7 +25,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.liamdebell.test"
+      "package": "com.liamdebell.test",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyB84ykiPauL-r0t2dzXIlBIE8igHvYC66E"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

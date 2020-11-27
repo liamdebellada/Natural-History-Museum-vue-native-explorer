@@ -56,5 +56,6 @@ export default {
     display: flex;
     bottom: 0;
     flex-direction: row;
+    z-index: 999;
 }
 </style>
