@@ -2,9 +2,9 @@
     <SafeAreaView class="container">
         <view class="map-container">
             <map-view class="container" :initial-region="coordinates">
-                <Marker v-if="requestFinished" v-for="(item, index) in dataPoints" :key="index" :coordinate="{latitude: item.lat, longitude: item.long}" :onPress="() => createSlideView(item)">
+                <Marker :tracksViewChanges="imgloading" v-if="requestFinished" v-for="(item, index) in dataPoints" :key="index" :coordinate="{latitude: item.lat, longitude: item.long}" :onPress="() => createSlideView(item)">
                     <view class="marker">
-                         <image :source="{uri: `${item.url}`}" class="marker-img"/>
+                         <image :source="{uri: `${item.url}`}" :onLoad="() => contentLoader(index)" class="marker-img"/>
                     </view>
                 </Marker>
             </map-view>
@@ -35,6 +35,7 @@ import BottomSheet from 'reanimated-bottom-sheet';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
 import SheetView from '../global-components/Sheet.vue'
+import { WebView } from "react-native-webview"
 
 var data = {
     taxonomy: "Tap an item on the map to get started."
@@ -67,7 +68,9 @@ export default {
             renderContent: renderContent,
             renderHeader: renderHeader,
             requestFinished: false,
-            dataPoints: []
+            dataPoints: [],
+            imgloading: true,
+            numLoaded: 0
         };
     },
     props: {
@@ -76,7 +79,7 @@ export default {
     created() {
         this.dataGetter()
     },
-    components: { NavBar, MapView, Marker, BottomSheet },
+    components: { NavBar, MapView, Marker, BottomSheet, WebView },
     methods: {
         createSlideView(selected) {
             this.$refs.refer.snapTo(1)
@@ -87,6 +90,11 @@ export default {
             var data = await requestNhmData.getDataStore('5955e890-3530-49a8-8042-cacca80d7f49')
             this.dataPoints = data
             this.requestFinished = true
+        },
+        contentLoader: function(i) {
+            if (i == this.dataPoints.length - 1) {
+                this.imgloading = false
+            }
         }
     }
 }

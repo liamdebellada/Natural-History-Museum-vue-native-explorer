@@ -28,12 +28,25 @@ var getDataStore = async (resourceId) => {
     var data = await request.get(`https://data.nhm.ac.uk/api/3/action/datastore_search?resource_id=${resourceId}`)
     .then(response => response.data.result.records)
     .catch(error => error)
+    data = data.filter(item => item.lat != "")
+    for (var item in data) {
+        data[item].lat = parseFloat(data[item].lat)
+        data[item].long = parseFloat(data[item].long)
+    }
     return data
 }
 
 var getOceanMinerals = async () => {
     var data = await request.get(`https://data.nhm.ac.uk/api/3/action/datastore_search?resource_id=240577b2-52a2-409c-9fcf-24b671f97994`)
-    .then(response => response.data.result.records)
+    .then(response => {
+        var usable = []
+        for (var item in response) {
+            if (item.lat != "") {
+                usable.push(item)
+            }
+        }
+        return usable
+    })
     .catch(error => error)
     return data
 }
