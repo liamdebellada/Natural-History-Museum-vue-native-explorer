@@ -1,0 +1,13 @@
+diff --git a/node_modules/reanimated-bottom-sheet/src/index.tsx b/node_modules/reanimated-bottom-sheet/src/index.tsx
+index fea09b1..5c82457 100644
+--- a/node_modules/reanimated-bottom-sheet/src/index.tsx
++++ b/node_modules/reanimated-bottom-sheet/src/index.tsx
+@@ -6,7 +6,7 @@ import {
+   TapGestureHandler,
+   State as GestureState,
+ } from 'react-native-gesture-handler'
+-
++console.log("im imported!!!")
+ type Props = {
+   /**
+    * Points for snapping of bottom sheet component. They define distance from bottom of the screen.
