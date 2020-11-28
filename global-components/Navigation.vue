@@ -13,7 +13,7 @@
             <image :source="require('../assets/map-pin.png')" class="icon"/>
         </touchable-opacity>
         <touchable-opacity class="nav-bar-child" :on-press="() => navigateTo('Settings')">
-            <image :source="require('../assets/settings.png')" class="icon"/>
+            <image :source="require('../assets/settings-icon.png')" class="icon"/>
         </touchable-opacity>
     </view>
 </template>
@@ -33,13 +33,13 @@ export default {
 
 <style>
 .icon {
-    height: 40;
-    width: 40;
+    height: 30;
+    width: 30;
 }
+
 
 .nav-bar-child {
     height: 100%;
-    background-color: white;
     width: 20%;
     flex: 1;
     /* border-color: grey;
@@ -49,13 +49,14 @@ export default {
 }
 
 .nav-bar {
-    background-color: #5c37b0;
-    height: 55px;
+    background-color: #1e1e1e;
+    height: 45px;
     width: 100%;
     position: absolute;
     display: flex;
     bottom: 0;
     flex-direction: row;
     z-index: 999;
+    padding: 5;
 }
 </style>

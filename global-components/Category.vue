@@ -24,10 +24,11 @@ export default {
 
 <style>
     .category-parent {
-        background-color: #0f0f0f;
+        background-color: #1e1e1e;
         height: 180;
         width: 100%;
         margin-bottom: 15;
+        border-radius: 10;
     }
     .category-child {
         padding: 10;
