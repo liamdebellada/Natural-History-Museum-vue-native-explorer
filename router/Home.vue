@@ -43,7 +43,12 @@
         <view class="category-container">
           <CategoryCard :navigation="this.props.navigation" v-bind:item="data"></CategoryCard>
         </view>
-        <text class="title-text">Pinned content</text>
+        <view class="refresh-pins">
+            <text class="title-text">Pinned content</text>
+            <touchable-opacity :on-press="() => refreshPins()" class="refresh-button">
+              <text>Refresh</text>
+            </touchable-opacity>
+        </view>
         <view class="another">
           <scroll-view :horizontal="true" :showsHorizontalScrollIndicator="false">
             <view v-for="(item, index) in pins" :key="index" class="h-card">
@@ -51,7 +56,7 @@
                 <image class="horizontal-img" :source="{uri: 'https://www.merton.ac.uk/images/mertoncollege_natural-history-museum-travel_and_tourism.jpg'}"/>
               </view>
               <view class="internal-text-container">
-                <text class="internal-text">Proper Text here.</text>
+                <text class="internal-text">{{item.title}}</text>
               </view>
               <view class="flex-container" :style="{top: 180, left: 0, marginLeft: -10}">
                 <view class="sub-element">
@@ -67,13 +72,13 @@
 </template>
 
 <script>
-var requestNhmData = require('../ApiCaller/handle.js')
 import React from 'react';
 import {Text, View} from 'react-native';
 
 import NavBar from '../global-components/Navigation.vue'
 import CategoryCard from '../global-components/Category.vue'
 import { LinearGradient } from 'expo-linear-gradient';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 export default {
   data() {
     return {
@@ -101,12 +106,13 @@ export default {
           }
         ],
         greetingMessage: '',
-        pins: [1, 2, 3, 4]
+        pins: []
     };
   },
-  created() {
+  async mounted() {
     var time = new Date().getHours()
     this.greetingMessage = (time < 12 ? 'Good morning' : time >= 12 && time < 18 ? 'Good afternoon' : 'Good Evening')
+    this.pins = JSON.parse(await AsyncStorage.getItem('pins'))
   },
   props: {
     navigation: {
@@ -119,6 +125,9 @@ export default {
     },
     cardDetection(i) {
       return i == this.cards.length - 1 ? 30 : 0
+    },
+    async refreshPins() {
+        this.pins = JSON.parse(await AsyncStorage.getItem('pins'))
     }
   },
   components: {
@@ -137,6 +146,20 @@ export default {
     font-size: 24px;
     font-weight: 500;
     padding-left: 20;
+}
+
+.refresh-pins {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.refresh-button {
+  margin-left: auto;
+  margin-right: 30;
+  background-color:#ac34df54;
+  padding: 5;
+  border-radius: 10;
 }
 
 .img-container {
