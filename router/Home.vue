@@ -41,11 +41,28 @@
         </view>
         <text class="title-text">Popular categories</text>
         <view class="category-container">
-          <CategoryCard :navigation="this.props.navigation" v-for="item in data" v-bind:item="item" :key="item.title"></CategoryCard>
+          <CategoryCard :navigation="this.props.navigation" v-bind:item="data"></CategoryCard>
         </view>
         <text class="title-text">Pinned content</text>
+        <view class="another">
+          <scroll-view :horizontal="true" :showsHorizontalScrollIndicator="false">
+            <view v-for="(item, index) in pins" :key="index" class="h-card">
+              <view class="internal-img-container">
+                <image class="horizontal-img" :source="{uri: 'https://www.merton.ac.uk/images/mertoncollege_natural-history-museum-travel_and_tourism.jpg'}"/>
+              </view>
+              <view class="internal-text-container">
+                <text class="internal-text">Proper Text here.</text>
+              </view>
+              <view class="flex-container" :style="{top: 180, left: 0, marginLeft: -10}">
+                <view class="sub-element">
+                  <text class="star-text">{{`\u2605 5.0`}}</text>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
     </scroll-view>
-    <NavBar :navigation="this.props.navigation" v-bind:selected="selectedIndex"></NavBar>
+    <NavBar :navigation="this.props.navigation" v-bind:selected="0"></NavBar>
   </view>
 </template>
 
@@ -84,7 +101,7 @@ export default {
           }
         ],
         greetingMessage: '',
-        selectedIndex: this.navigation["state"]["params"]
+        pins: [1, 2, 3, 4]
     };
   },
   created() {
@@ -126,9 +143,49 @@ export default {
     width: auto;
 }
 
+.internal-text-container {
+  margin: 20;
+  margin-top: 10;
+  max-width: 98;
+}
+
+.internal-text {
+  font-size: 16;
+  font-weight: 500;
+  color: black;
+}
+
 .header-image {
     height: 200;
     width: 424;
+}
+
+.h-card {
+  height: 220;
+  width: 150;
+  margin-right: -50;
+  border-radius: 20;
+  margin: 20;
+}
+
+.internal-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15;
+  margin-left: -12;
+}
+
+.horizontal-img {
+  height: 120;
+  width: 100;
+  background-color: blue;
+  border-radius: 15;
+}
+
+.another {
+  padding-bottom: 60;
+  margin-left: -18;
 }
 
 .content-main-scroll {

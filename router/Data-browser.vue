@@ -44,7 +44,7 @@
         </view>
       </view>
     </scroll-view>
-    <NavBar :navigation="this.props.navigation"></NavBar>
+    <NavBar :navigation="this.props.navigation" v-bind:selected="2"></NavBar>
   </SafeAreaView>
 </template>
 

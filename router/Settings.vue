@@ -7,7 +7,7 @@
             <text class="sub-text">Version: 1.0.0 - Liam Debell :)</text>
         </view>
     </scroll-view>
-    <NavBar :navigation="this.props.navigation"/>
+    <NavBar :navigation="this.props.navigation" v-bind:selected="4"/>
     </SafeAreaView>
 </template>
 

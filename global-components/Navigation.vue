@@ -1,8 +1,8 @@
 <template>
 <view>
-    <view class="nav-bar">
-        <touchable-opacity v-for="(navItem, index) in navigationOptions" :key="index" class="nav-bar-child" :on-press="() => {navigateTo(navItem.route, index)}">
-            <image :source="navItem.image" class="icon" :style="{tintColor: navItem.color}"/>
+    <view ref="test" class="nav-bar">
+        <touchable-opacity v-for="(navItem, index) in navigationOptions" :key="index" class="nav-bar-child" :on-press="() => {navigateTo(navItem.route)}">
+            <image :source="navItem.image" class="icon" :style="{tintColor: indexDetection(index)}"/>
         </touchable-opacity>
     </view>
 </view>
@@ -11,48 +11,48 @@
 <script>
 import { AsyncStorage } from 'react-native'
 export default {
-  data () {
-      return {
-          navigationOptions: [
-              {
-                  route: 'Home',
-                  image: require('../assets/home.png'),
-                  color: 'white'
-              },
-              {
-                  route: 'Recommended',
-                  image: require('../assets/list.png'),
-                  color: 'white'
-              },
-              {
-                  route: 'DataSets',
-                  image: require('../assets/dataset.png'),
-                  color: 'white'
-              },
-              {
-                  route: 'Map',
-                  image: require('../assets/map-pin.png'),
-                  color: 'white'
-              },
-              {
-                  route: 'Settings',
-                  image: require('../assets/settings-icon.png'),
-                  color: 'white'
-              }
-          ],
-          selected: 0
-      }
+    data () {
+        return {
+            navigationOptions: [
+                {
+                    route: 'Home',
+                    image: require('../assets/home.png'),
+                    color: 'white'
+                },
+                {
+                    route: 'Recommended',
+                    image: require('../assets/list.png'),
+                    color: 'white'
+                },
+                {
+                    route: 'DataSets',
+                    image: require('../assets/dataset.png'),
+                    color: 'white'
+                },
+                {
+                    route: 'Map',
+                    image: require('../assets/map-pin.png'),
+                    color: 'white'
+                },
+                {
+                    route: 'Settings',
+                    image: require('../assets/settings-icon.png'),
+                    color: 'white'
+                }
+            ]
+        }
   },
   props: {
-    navigation: { type: Object }
+    navigation: { type: Object },
+    selected: {type: Number}
   },
   methods: {
-    async navigateTo(route, i) {
-        this.navigation.navigate(route, {active: i})
+    async navigateTo(route) {
+        this.navigation.navigate(route)
+    },
+    indexDetection(i) {
+        return i == this.selected ? '#ab34df' : '#939393'
     }
-  },
-  create() {
-      console.log(this.selected)
   }
 };
 </script>
@@ -75,7 +75,7 @@ export default {
 }
 
 .nav-bar {
-    background-color:#6a3390;
+    background-color:#f6f6f6;
     height: 48px;
     width: 100%;
     position: absolute;

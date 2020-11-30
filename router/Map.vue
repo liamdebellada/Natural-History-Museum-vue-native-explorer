@@ -19,7 +19,7 @@
             :enabledInnerScrolling="false"
             />
         </view>
-        <NavBar :navigation="this.props.navigation"></NavBar>
+        <NavBar :navigation="this.props.navigation" v-bind:selected="3"></NavBar>
     </SafeAreaView>
 </template>
 
