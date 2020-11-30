@@ -26,7 +26,7 @@
                 </view>
             </view>
             <view class="title-container">
-                <text class="title-text">Learn more</text>
+                <text class="title-text">Store</text>
             </view>
             <view class="learn-list-container">
                 <touchable-opacity v-for="learnItem in learnMore" :key="learnItem.title">
