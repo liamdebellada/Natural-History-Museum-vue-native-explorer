@@ -24,7 +24,7 @@ export default {
 
 <style>
     .category-parent {
-        background-color: #1e1e1e;
+        background-color:  #ac34df54;
         height: 180;
         width: 100%;
         margin-bottom: 15;
@@ -34,7 +34,7 @@ export default {
         padding: 10;
     }
     .category-text-title {
-        color: white;
+        color: black;
         font-weight: 500;
         font-size: 16;
     }

@@ -14,8 +14,29 @@
                 </view>
                 <text class="title-text-header-sub">Discover</text>
                 <text class="description-text">Star browsing to learn more...</text>
-                <text class="description-text-2">Version: 1.0.0 - Debug</text>
             </view>
+                <view class="horizontal-card-container">
+                  <scroll-view :horizontal="true" :showsHorizontalScrollIndicator="false" class="scrolling-card-container">
+                    <view v-for="(card, index) in cards" :key="index" class="horizontal-card" :style="{marginRight: cardDetection(index)}">
+                      <touchable-opacity class="card-layout">
+                        <image :style="{height: 110, width: 80, borderRadius: 15}" :source="{uri: card.img}"/>
+                        <view class="card-text-container">
+                          <view class="contain-text">
+                            <text class="card-text">{{card.title}}</text>
+                          </view>
+                          <view class="flex-container">
+                            <view class="sub-element">
+                              <text class="star-text">{{`\u2605 5.0`}}</text>
+                            </view>
+                            <view class="sub-element">
+                              <text class="star-text">{{`\u2691 EN`}}</text>
+                            </view>
+                          </view>
+                        </view>
+                      </touchable-opacity>
+                    </view>
+                  </scroll-view>
+                </view>
           </LinearGradient>
         </view>
         <text class="title-text">Popular categories</text>
@@ -24,7 +45,7 @@
         </view>
         <text class="title-text">Pinned content</text>
     </scroll-view>
-    <NavBar :navigation="this.props.navigation"></NavBar>
+    <NavBar :navigation="this.props.navigation" v-bind:selected="selectedIndex"></NavBar>
   </view>
 </template>
 
@@ -35,9 +56,7 @@ import {Text, View} from 'react-native';
 
 import NavBar from '../global-components/Navigation.vue'
 import CategoryCard from '../global-components/Category.vue'
-
 import { LinearGradient } from 'expo-linear-gradient';
-
 export default {
   data() {
     return {
@@ -46,7 +65,26 @@ export default {
           {'title' : 'Minerals', "img" : require('../assets/minerals.png'), "navi" : 'Details'},
           {'title' : 'Ancient buildings', "img" : require('../assets/dolmen.png'), "navi" : 'Details'}
         ],
-        greetingMessage: ''
+        cards: [
+          {
+            img: 'https://www.museumnext.com/wp-content/uploads/2020/01/natural_history_Museum.jpg',
+            title: 'The world of dinos!'
+          },
+          { 
+            img: 'https://images.unsplash.com/photo-1580135952467-a4ff3ca4a752?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9',
+            title: 'Our rocky world.'
+          },
+          {
+            img: 'https://www.museumnext.com/wp-content/uploads/2020/01/natural_history_Museum.jpg',
+            title: 'Other content goes here'
+          },
+          {
+            img: 'https://www.museumnext.com/wp-content/uploads/2020/01/natural_history_Museum.jpg',
+            title: 'New title here!'
+          }
+        ],
+        greetingMessage: '',
+        selectedIndex: this.navigation["state"]["params"]
     };
   },
   created() {
@@ -59,8 +97,11 @@ export default {
     }
   },
   methods: {
-      goToDetailsScreen() {
-        this.navigation.navigate("Details", {"test" : "done"});
+    goToDetailsScreen() {
+        this.navigation.navigate("Details");
+    },
+    cardDetection(i) {
+      return i == this.cards.length - 1 ? 30 : 0
     }
   },
   components: {
@@ -71,11 +112,11 @@ export default {
 
 <style>
 .container {
-  background-color: #121212;
+  background-color: white;
   min-height: 100%;
 }
 .title-text {
-    color: white;
+    color: black;
     font-size: 24px;
     font-weight: 500;
     padding-left: 20;
@@ -124,7 +165,7 @@ export default {
 .title-text-header-sub {
     margin: 5;
     margin-left: 20;
-    margin-top: 80;
+    margin-top: 60;
     font-weight: 400;
     font-size: 40;
     color: white;
@@ -155,5 +196,68 @@ export default {
   width: 25;
   margin-right: 15;
   margin-left: auto;
+}
+
+.horizontal-card-container {
+  width: 100%;
+  height: 140;
+}
+.horizontal-card {
+  height: 100%;
+  width: 210;
+  background-color: white;
+  border-radius: 20;
+  margin-left: 30;
+}
+
+.red-container {
+  background-color: red;
+}
+
+.card-layout {
+  margin: 15;
+  display: flex;
+  flex-direction: row;
+}
+
+.card-text {
+  margin-left: 10;
+  margin-top: 5;
+  font-size: 18;
+  font-weight: 600;
+  width: 60%;
+}
+.sub-element {
+  height: 15;
+  min-width: 40;
+  width: auto;
+  background-color: #ac34df54;
+  margin: 5;
+  border-radius: 5;
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100;
+  margin: 10;
+  margin-left: 5;
+  position: absolute;
+  bottom: -5;
+}
+
+.star-text {
+  color: #000000;
+  font-size: 11;
+  padding-left: 3;
+}
+
+.contain-text {
+  width: 85%;
+  height: auto;
 }
 </style>
