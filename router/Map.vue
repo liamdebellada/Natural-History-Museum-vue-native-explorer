@@ -1,5 +1,9 @@
 <template>
     <SafeAreaView class="container">
+            <status-bar
+    background-color="white"
+    bar-style="light-content"
+    />
         <view class="map-container">
             <map-view class="container" :initial-region="coordinates">
                 <Marker :tracksViewChanges="imgloading" v-if="requestFinished" v-for="(item, index) in dataPoints" :key="index" :coordinate="{latitude: item.lat, longitude: item.long}" :onPress="() => createSlideView(item)">
@@ -60,8 +64,8 @@ export default {
     data: function() {
         return {
             coordinates: {
-                latitude: 51.5858233,
-                longitude: -0.0658707,
+                latitude: 52.4401,
+                longitude: -2.8333,
                 latitudeDelta: 0.0922,
                 longitudeDelta: 0.0421
             },

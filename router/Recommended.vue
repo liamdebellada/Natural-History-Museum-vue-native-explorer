@@ -1,5 +1,9 @@
 <template>
     <view class="container">
+        <status-bar
+        background-color="white"
+        bar-style="dark-content"
+        />
         <scroll-view class="scroll-container">
             <view class="title-container">
                 <text class="title-text">Recommended</text>
