@@ -32,11 +32,10 @@
             <view class="title-container">
                 <text class="title-text">Store</text>
             </view>
-            <view class="learn-list-container">
-                <touchable-opacity v-for="learnItem in learnMore" :key="learnItem.title">
-                    <text class="bulleted-list">{{`\u2022 ${learnItem.title}`}}</text>
-                </touchable-opacity>
-            </view>
+            <WebView
+            class="nhm-store"
+                :source="{uri: 'https://www.nhmshop.co.uk/?_ga=2.213256144.534850370.1606822981-1736709172.1606822981'}"
+            />
         </scroll-view>
         <NavBar :navigation="this.props.navigation" v-bind:selected="1"></NavBar>
     </view>
@@ -45,6 +44,7 @@
 <script>
 import NavBar from '../global-components/Navigation.vue'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { WebView } from 'react-native-webview';
 export default {
     data() {
         return {
@@ -73,7 +73,7 @@ export default {
         navigation: {type: Object}
     },
     components: {
-        NavBar
+        NavBar, WebView
     },
     async created() {
         await this.checkPinned()
@@ -152,6 +152,12 @@ export default {
     display: flex;
     align-items: center;
     flex-direction: row;
+}
+
+.nhm-store {
+    width: 100%;
+    height: 500;
+    margin-bottom: 100;
 }
 
 .recommended-body {

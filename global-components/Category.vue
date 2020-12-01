@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 export default {
     props: {
         item: { type: Array },
@@ -29,7 +29,7 @@ export default {
                 `${data.title} Options`,
                 "Please select one of the following:",
                 [
-                    {text: 'Report', onPress: () => console.log('Reported.')},
+                    {text: 'More', onPress: () => Linking.openURL('https://www.nhm.ac.uk/')},
                     {text: 'Remove', onPress: () => this.item.splice(i, 1)}
                 ],
                 { cancelable: true }

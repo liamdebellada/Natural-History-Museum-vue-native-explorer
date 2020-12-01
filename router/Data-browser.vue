@@ -1,16 +1,20 @@
 <template>
-  <SafeAreaView class="container">
+  <view class="container">
     <scroll-view class="scroll-container">
       <view class="title-container">
         <text class="title-text">Datasets</text>
+        <text-input class="input-field" v-model="requestVal" placeholder="Search..." placeholderTextColor="#b4a19d"></text-input>
       </view>
       <view class="browser-container">
         <view class="browser">
-          <text-input class="input-field" v-model="requestVal" placeholder="Search..." placeholderTextColor="#b4a19d"></text-input>
-          <scroll-view class="auto-complete-results">
-            <view v-if="resultsPresent">
+          <scroll-view :showsVerticalScrollIndicator="false" class="auto-complete-results">
+            <view class="results-wrapper" v-if="resultsPresent">
+              <view v-if="!hasTyped" class="not-typed-view">
+                <text class="not-typed-text">Results will appear here when you start typing!</text>
+              </view>
               <view class="i-view" v-for="key in keys" :key="key">
-                <touchable-opacity :on-press="() => getter(key)">
+                <touchable-opacity class="search-result-layout" :on-press="() => getter(key)">
+                  <image :style="{height: 20, width: 20, marginRight: 10}" :source="require('../assets/search.png')"/>
                   <text class="i-result">{{key}}</text>
                 </touchable-opacity>
               </view>
@@ -24,20 +28,22 @@
       <view class="title-container">
         <text class="title-text">Results:</text>
       </view>
-      <view class="result-container" v-if="complete" v-for="(res, index) in request" :key="res">
-        <view class="result">
-          <text class="attribute-header">Title</text>
-          <text class="attribute-text">{{res.title}}</text>
-          <text class="attribute-header">Resource ID</text>
-          <text class="attribute-text">{{res.resource_id}}</text>
-          <text class="attribute-header">Data</text>
-          <touchable-opacity :on-press="() => showData(index)"><text class="attribute-text">{{`\u27A4`}}</text></touchable-opacity>
-          <view v-if="res.displayData">
-            <view v-for="(item, index) in res.dataRequest" :key="index">
-              <view class="data-object-container">
-                <view v-for="(k, v) in item" :key="v">
-                    <text class="key">{{`${v}: `}}<text class="item">{{k}}</text></text>
-                </view> 
+      <view class="result-wrapper">
+        <view class="result-container" v-if="complete" v-for="(res, index) in request" :key="res">
+          <view class="result">
+            <text class="attribute-header">Title</text>
+            <text class="attribute-text">{{res.title}}</text>
+            <text class="attribute-header">Resource ID</text>
+            <text class="attribute-text">{{res.resource_id}}</text>
+            <text class="attribute-header">Data</text>
+            <touchable-opacity :on-press="() => showData(index)"><text class="attribute-text">{{`\u27A4`}}</text></touchable-opacity>
+            <view v-if="res.displayData">
+              <view v-for="(item, index) in res.dataRequest" :key="index">
+                <view class="data-object-container">
+                  <view v-for="(k, v) in item" :key="v">
+                      <text class="key">{{`${v}: `}}<text class="item">{{k}}</text></text>
+                  </view> 
+                </view>
               </view>
             </view>
           </view>
@@ -45,7 +51,7 @@
       </view>
     </scroll-view>
     <NavBar :navigation="this.props.navigation" v-bind:selected="2"></NavBar>
-  </SafeAreaView>
+  </view>
 </template>
 
 <script>
@@ -64,7 +70,8 @@ export default {
             requestVal: '',
             test: this.navigation["state"]["params"],
             keys: [],
-            resultsPresent: true
+            resultsPresent: true,
+            hasTyped: false
         }
     },
   props: {
@@ -103,6 +110,7 @@ export default {
   },
   watch: {
     requestVal: function(current, previous) {
+      if (!this.hasTyped) this.hasTyped = true
       if (current.length > 0) {
         var results = reFind.findKey(current)
         if (results.length < 1) {
@@ -122,27 +130,57 @@ export default {
 
 <style>
 .container {
-  background-color: #1f1f1f;
+  background-color: white;
   min-height: 100%;
 }
 .title-container {
   margin: 20;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.result-wrapper {
+  margin-bottom: 100;
+}
+
+.not-typed-view {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.not-typed-text {
+  font-size: 20;
+  text-align: center;
+  color: #8c8c8c;
+}
+
+.search-result-layout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 2%;
+}
+
+.results-wrapper {
+  margin-bottom: 20;
 }
 
 .scroll-container {
-  margin-bottom: 50;
+  padding-top: 30;
 }
 
 .title-text {
-  color: white;
+  color: black;
   font-size: 30;
   font-weight: 500;
+  flex-basis: 35%;
 }
 
 .browser {
   width: 100%;
   height: 350;
-  background-color: #0f0f0f;
   padding: 10;
 }
 
@@ -151,28 +189,31 @@ export default {
 }
 
 .input-field {
-  width: 100%;
-  height: 50;
+  width: auto;
+  height: 35;
   border-radius: 5;
   padding: 10;
-  background-color: #171717;
-  color: white;
+  margin-left: 10;
+  background-color: #f6f6f6;
+  color: black;
+  flex-basis: 62%;
 }
 
 .auto-complete-results {
   margin-top: 10;
-  background-color: #171717;
+  background-color: #f6f6f6;
   padding: 10;
+  border-radius: 15;
 }
 
 .i-result {
-  color: white;
+  color: black;
   font-size: 18;
 }
 
 .i-view {
-  background-color: #2e2e2e;
   margin-top: 10;
+  overflow: hidden;
 }
 
 .result-container {
@@ -180,15 +221,16 @@ export default {
 }
 
 .result {
-  background-color: #0f0f0f;
+  background-color:#f6f6f6;
   width: 100%;
   min-height: 150;
   height: auto;
   padding: 10;
+  border-radius: 15;
 }
 
 .attribute-text {
-  color: white;
+  color: black;
   font-size: 18;
   margin-bottom: 5;
 }
@@ -198,18 +240,19 @@ export default {
 }
 
 .data-object-container {
-  background-color:#2e2e2e;
+  background-color:white;
+  border-radius: 5;
   padding: 5;
   margin: 5;
 }
 
 .key {
-  color: #b4a19d;
+  color: #ac34dfcb;
   font-weight: 500;
 }
 
 .item {
-  color: white;
+  color: black;
   font-weight: 200;
 }
 </style>

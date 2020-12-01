@@ -58,6 +58,7 @@ export default {
     },
     methods: {
         async changeSetting(val, index, set, func) {
+            
             if (func && val) {
                 func()
             }
