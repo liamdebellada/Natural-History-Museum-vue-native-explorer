@@ -52,7 +52,7 @@ export default {
                 "Name" : "Liam Debell",
                 "Version" : "1.0.0",
                 "License" : "Apache",
-                "Source" : "https://github.com/Natural-History-Museum-vue-native-explorer"
+                "Source" : "https://github.com/liamdebellada/Natural-History-Museum-vue-native-explorer"
             }
         }
     },

@@ -42,11 +42,12 @@ import SheetView from '../global-components/Sheet.vue'
 import { WebView } from "react-native-webview"
 
 var data = {
-    taxonomy: "Tap an item on the map to get started."
+    message: "Tap an item on the map to get started!",
+
 }
 var renderContent = () => {
     return (
-        <View style={{backgroundColor: 'white', height: 1000}}>
+        <View style={{backgroundColor: 'white', height: 660}}>
             <SheetView item={data}/>
         </View>
     )
@@ -86,7 +87,7 @@ export default {
     components: { NavBar, MapView, Marker, BottomSheet, WebView },
     methods: {
         createSlideView(selected) {
-            this.$refs.refer.snapTo(1)
+            this.$refs.refer.snapTo(0)
             data = selected
             this.$refs.refer.forceUpdate()
         },

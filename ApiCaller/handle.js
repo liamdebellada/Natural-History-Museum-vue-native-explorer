@@ -36,19 +36,4 @@ var getDataStore = async (resourceId) => {
     return data
 }
 
-var getOceanMinerals = async () => {
-    var data = await request.get(`https://data.nhm.ac.uk/api/3/action/datastore_search?resource_id=240577b2-52a2-409c-9fcf-24b671f97994`)
-    .then(response => {
-        var usable = []
-        for (var item in response) {
-            if (item.lat != "") {
-                usable.push(item)
-            }
-        }
-        return usable
-    })
-    .catch(error => error)
-    return data
-}
-
 export { getNhmDataSets, getDataStore }
