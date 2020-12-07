@@ -17,11 +17,13 @@ import datasetScreen from './router/Data-browser.vue'
 import recommendedScreen from './router/Recommended.vue'
 import mapScreen from './router/Map.vue'
 import settingsScreen from './router/Settings.vue'
+import articleScreen from './router/Article.vue'
 
 const NAV_OPTIONS = {
   header: null,
   animationEnabled: false
 }
+
 
 const StackNavigator = createStackNavigator(
   {
@@ -44,6 +46,10 @@ const StackNavigator = createStackNavigator(
     Settings: {
       screen: settingsScreen,
       navigationOptions: NAV_OPTIONS
+    },
+    Article: {
+      screen: articleScreen,
+      navigationOptions: NAV_OPTIONS,
     }
   },
   {

@@ -18,7 +18,7 @@
                 <view class="horizontal-card-container">
                   <scroll-view :horizontal="true" :showsHorizontalScrollIndicator="false" class="scrolling-card-container">
                     <view v-for="(card, index) in cards" :key="index" class="horizontal-card" :style="{marginRight: cardDetection(index)}">
-                      <touchable-opacity class="card-layout">
+                      <touchable-opacity class="card-layout" :on-press="() => goToArticleScreen([card.title, card.routeData])">
                         <image :style="{height: 110, width: 80, borderRadius: 15}" :source="{uri: card.img}"/>
                         <view class="card-text-container">
                           <view class="contain-text">
@@ -84,13 +84,14 @@ export default {
     return {
         data: [ //remeber specific routes and key layout
           {'title' : 'Dinosaurs', "img" : require('../assets/dino.png'), "navi" : 'DataSets'},
-          {'title' : 'Minerals', "img" : require('../assets/minerals.png'), "navi" : 'Details'},
-          {'title' : 'Ancient buildings', "img" : require('../assets/dolmen.png'), "navi" : 'Details'}
+          {'title' : 'Minerals', "img" : require('../assets/minerals.png'), "navi" : 'Map'},
+          {'title' : 'Ancient buildings', "img" : require('../assets/dolmen.png'), "navi" : 'DataSets'}
         ],
         cards: [
           {
             img: 'https://www.museumnext.com/wp-content/uploads/2020/01/natural_history_Museum.jpg',
-            title: 'The world of dinos!'
+            title: 'The world of dinos!',
+            routeData: `test`
           },
           { 
             img: 'https://images.unsplash.com/photo-1580135952467-a4ff3ca4a752?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9',
@@ -120,8 +121,8 @@ export default {
     }
   },
   methods: {
-    goToDetailsScreen() {
-        this.navigation.navigate("Details");
+    goToArticleScreen(ad) {
+        this.navigation.navigate("Article", {data: ad});
     },
     cardDetection(i) {
       return i == this.cards.length - 1 ? 30 : 0
