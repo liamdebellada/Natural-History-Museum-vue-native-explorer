@@ -50,13 +50,13 @@ export default {
         return {
             recommended: [
                 {
-                    "title" : "Title",
+                    "title" : "Pinned 1",
                     "id" : 1,
                     "pinned" : false,
                     "description" : "This is a description that is inplace of where the real description will be placed."
                 },
                 {
-                    "title" : "Title 2",
+                    "title" : "Pinned 2",
                     "id" : 2,
                     "pinned" : false,
                     "description" : "This is another description that is inplace of where the real description will be placed."

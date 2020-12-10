@@ -53,7 +53,7 @@
           <scroll-view :horizontal="true" :showsHorizontalScrollIndicator="false">
             <view v-for="(item, index) in pins" :key="index" class="h-card">
               <view class="internal-img-container">
-                <image class="horizontal-img" :source="{uri: 'https://www.merton.ac.uk/images/mertoncollege_natural-history-museum-travel_and_tourism.jpg'}"/>
+                <image class="horizontal-img" :source="{uri: 'https://wwwaxiellcom.cdn.triggerfish.cloud/uploads/sites/7/2018/06/blog-post.jpg'}"/>
               </view>
               <view class="internal-text-container">
                 <text class="internal-text">{{item.title}}</text>
@@ -91,7 +91,24 @@ export default {
           {
             img: 'https://www.museumnext.com/wp-content/uploads/2020/01/natural_history_Museum.jpg',
             title: 'The world of dinos!',
-            routeData: `test`
+            routeData: `Were dinosaurs adhering to social distancing rules, or were they living in tight-knit herds? A new study has been looking into the social behaviour of ankylosaurs. 
+
+Read what our dinosaur experts think about this, as well as another paper exploring how dinosaur skulls evolved. 
+
+Fossil bones are great for telling us how ancient animals looked, but not how they behaved. Whether dinosaurs maintained their social distance or moved in herds has long been an area of debate.
+
+Evidence for herding behaviour in large herbivorous dinosaurs has previously been found in the form of trackways and something known as Mass Death Assemblages (MDAs). These are sites where the bones of large numbers of dinosaurs are found in a single location and can contain the remains of thousands of individuals.
+
+If these bones are all from dinosaurs of the same species, it's possible they all died around the same time and so were perhaps living together as a herd.
+
+A team led by Gábor Botfalvai have recently published a paper investigating the evidence for social structures amongst one particular group of dinosaurs: the armoured, plant-eating ankylosaurs.
+
+Typically, ankylosaur fossils are found as individual specimens.
+
+Their tank-like bodies and short legs were likely inefficient for long-distance walking in herds suggesting that they lived a solitary lifestyle with a limited home range, similar to that of modern-day rhinoceros.
+
+This solitary lifestyle is supported by the fact that the dinosaurs were covered in extensive body armour that was probably used in part for defence. This indicates that at least for heavily armoured adult ankylosaurs, the animals were capable of fending off predators on their own.
+`
           },
           { 
             img: 'https://images.unsplash.com/photo-1580135952467-a4ff3ca4a752?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9',
